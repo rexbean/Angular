@@ -72,7 +72,7 @@
 ### classes
 - In recent version of JavaScript, we can use keyword class
 - The advantage in this way is .ts file will be compiled to the old version of JavaScript. It can be used in any browser
-``` JavaScript
+``` TypeScript
     class Car  {
         engineName: string;
         gears:number;
@@ -109,7 +109,7 @@
 ```
 ### Interfaces
 - example with just fields
-    ``` JavaScript
+    ``` TypeScript
     interface User{
         username: string;
         password: string;
