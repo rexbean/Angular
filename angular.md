@@ -127,7 +127,7 @@
     user = {username: 'max', password: 'supersecret'};
     ```
 - example with just method
-    ```
+    ``` TypeScript
     interface CanDrive{
         accelerate(speed:number):void;
     }
