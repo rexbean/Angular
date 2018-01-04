@@ -1,7 +1,7 @@
 # Angular 4
 ## What is angular?
 - Angular is a JavaScript Framework which allows you to create reactive **Single-Page-Applications(SPAs)**
-- SPAs means that it seems that we have many different urls but it only one HTML files and it is rendered by the browser.
+- SPAs means that it seems that we have many different urls but it only has one HTML files and it is rendered by the browser.
 - advantage: It gives users very reactive user experiences.
 ## Angular.js vs Angular 2/ Angular 4
 - Angular 5 is the latest version
@@ -27,7 +27,7 @@
         - index.html file will be replaced by the **component** defined in the app component.html file.
         - In angular, **we use componets to build our web application** and **the compontent defines what we will see at the page**.
     + The **assest folder** is used to store some static assestin our app, like images.
-    + The environment folder can be used for environment variables.
+    + The **environment folder** can be used for environment variables.
 - When the **ng serve** is running, it will watch the files for changes and automatically recompile them and reload our project in the browser.
 - install and import other dependencies
     + using npm install --save \<package name>, for example: npm install --save bootstrap
@@ -35,7 +35,7 @@
     + It allows us to define some imports of global style sheets which will apply to our whole application.
     + It has imported style.css defaultly.
     + We can add reference to the bootstrap.css file we have just downloaded.
-    ```
+    ``` TypeScript
         "styles":[
             "../node_modules/bootstrap/dist/css/bootstap.min.css",
             "styles.css"
@@ -122,7 +122,7 @@
     + Interface can tell objects that they can safely access the certain attributes or method.
     + Interface can be also used to create our own type without creating a class for it. When we think we don't need to create a class for it and instantiate it. We just want a blue print for it.
 - Example
-    ```
+    ``` TypeScript
     let user: User;
     user = {username: 'max', password: 'supersecret'};
     ```
@@ -140,7 +140,7 @@
 - We won't see any interfaces in the compiled .js file
 ### generics
 - Generic allow us to be flexible regarding the type the certain object uses.
-    ```
+    ``` TypeScript
     let numberArray: Array<number>;
     numberArray = [1, 2, 3];
     ```
