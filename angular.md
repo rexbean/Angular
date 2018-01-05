@@ -1,4 +1,4 @@
-# Angular 4
+# Introduction to Angular
 ## What is angular?
 - Angular is a JavaScript Framework which allows you to create reactive **Single-Page-Applications(SPAs)**
 - SPAs means that it seems that we have many different urls but it only has one HTML files and it is rendered by the browser.
@@ -41,8 +41,8 @@
             "styles.css"
         ]
     ```
-## TypeScript
-### Introduction
+# TypeScript
+## Introduction
 - TypeScript is a superset to JavaScript.
 - It offers more features than vanilla(common) JavaScript. For example, Strong typing, Classes, Interfaces,etc.
 - Advantages:
@@ -53,7 +53,7 @@
         - Reducing errors to assign the wrong type to variables
         - It will check when you write it instead of the time you run it.
 - TypeScript cannot run in the browser, it should be compiled to JavaScript in the end.This compilation is handled by CLI. The compilation is very fast and in the end JavaScript will run in the browser.
-### Type
+## Type
 - let \<variable name>: \<Type>
     - For example: **let myString: string;**
     - Assignment: **myString = 'This is a string';**
@@ -69,7 +69,7 @@
     - Array\<string>
     - any
     - we also get void and enums
-### classes
+## Classes
 - In recent version of JavaScript, we can use keyword class
 - The advantage in this way is .ts file will be compiled to the old version of JavaScript. It can be used in any browser
 ``` TypeScript
@@ -107,7 +107,7 @@
     car.throttle();
     console.log(Car.numberOfWheels());
 ```
-### Interfaces
+## Interfaces
 - example with just fields
     ``` TypeScript
     interface User{
@@ -138,16 +138,58 @@
     };
     ```
 - We won't see any interfaces in the compiled .js file
-### generics
+## Generics
 - Generic allow us to be flexible regarding the type the certain object uses.
     ``` TypeScript
     let numberArray: Array<number>;
     numberArray = [1, 2, 3];
     ```
-### wrap-up & module
+## Wrap-up & module
 - Modularity is supported by TypeScript.
 - It is used to tell us the variable, class or whatever should be available outside of the file where it lives in
 - By defualt, if we don't have the key word export, things can only be used in the file.
 - When we add the keyword export, we can use the things in other files.
 - The system just load our JavaScript files in which are different parts live. We need the export keyword for this to actually work correctly.
 - Modularity is really about splitting up our code over several files and have them work together smoothly through typescript and other things.
+
+# Angular Basics
+## How Angular loaded and started
+- Angular is a framework which allows us to create a single page application. So the single page is the index.html. In other words, index.html is served by the server, but other component.html is not served by the server.
+- In index.html file, we can see **\<app-root>Loading...\</app-root>**. It is not a default. It is one of our componetns created by CLI for us.
+- The files in the app folder which have component name in their names.
+- Load: **Tag in index.html -> selector in componet.ts ->
+templateUrl -> componet.html (content which will replace the tag in index.html)**
+- **ng serve** will rebuild our project. It will create JavaScript bundles and derive imports in the index.html. These will contains **our own code** too.
+- These JavaScript imports will be executed at first.
+- **Main.ts** will be the first code to be executed.
+    + many imports maybe to check production mode or not, turn off the warning or not.
+    + Bootstrap starts our application: **platformBrowserDynamic().bootstrapModule(AppModule)** -> **AppModule** -> import  {AppModule} from **app.module.ts** -> **boostrap:[AppComponent]** -> import {AppComponent} from **'app.component.ts'** -> **selector**
+## Components
+### Why we use Components?
+- We build our whole application by composing it from a couple of components which we create on our own.
+- We start with the AppComponent which is the root components. It hold our entire application in the end.
+- AppComponent will be to component which will add or nets other components to.
+- We separate the who page into several reusable parts(components). Each components has their own template and style.The most important, they can have their own business logic.
+- Advantage: reuse the business logic, styling and etc.
+### Creating our own component
+- We will not add selector in the index.html.We add them in the app.component.html
+- Create a new folder(**\<component name>**).Its name is same as the component's name.
+- Create **\<component name>.component.ts**
+- At first, component is a **class**.
+- We should add a **decorator** to tell angular this is a comonent. Decorators are a TypeScript features which allow us to enhance our classes and enhance elements in our code.
+- import decorator
+- Create template file in the same folder **\<component name>.component.html**
+    ``` TypeScript
+    import { Component } from '@angular/core'
+    // in order to use @Component() decorator.@angular/core has the core functions
+    @Component({ //special decorator
+        selector: 'app-<Component name>',
+        templateUrl:'relative path to the .html file'
+
+    }) // pass a JavaScript object to this component to configure
+    // setup some meta data to tell angular what to do with this class
+    export class <component name>Component {
+
+    }
+    ```
+### Understanding the module and component
