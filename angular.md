@@ -216,7 +216,7 @@ templateUrl -> componet.html (content which will replace the tag in index.html)*
 - Using **template property** means inline template.
 - We can directly write the HTML code in the **template property**
     + Using **''** , we can just write the HTML code in one line.
-    + Uisng **``** , we can write the HTML code in multiple line.
+    + Uisng **``** , we can write the HTML code in multiple lines.
 - Inline template is better when there are less than 3 lines of HTML code.
 ### Working with component style
 - Using **bootstrap** makes the page seem more beautiful in .html file.
@@ -252,3 +252,39 @@ templateUrl -> componet.html (content which will replace the tag in index.html)*
     - by class :
         + selector : '. \<selector name>'
         + \<div class = "\<selector name>">\</div>
+## DataBinding
+### What is dataBinding
+- DataBinding == Communication
+- Communication between your TypeScript code of your component and the template which the user sees.
+- In typescript code, we will **fetch some data from server** or **do some calcualtion** and want to show to the user by template.
++ Output data:
+    + String interpolation : {{data}}
+    + Property Binding : [property] = "data"
++ React to (User) Events:
+    + Event Binding : (event) = "expression"
++ Two - way - binding
+### String Interpolation:
+- We use **{{ }}** to do the string interpolation
+    - Things in the **{{}}** must be **string in the end**,it could be
+        + String
+        + Number
+        + Method which returns String
+### Property Binding
+- We use **[\<property name>] = "\<value>"** to do the property binding.
+- Property Binding is used to bind the **value(fields or methond)** defined in the component class to the **property of the HTML element(DOM)**.
+- **() => {} means function(){}**
+### Property binding VS String interpolation
+- String interpolation is just a String
+- Property Binding can be any kind of value
+### Event binding
+- We use **(\<event name>) = "\<method name>()"** to do the event binding.
+- Using name **on\<event name>** names the method.
+### Passing and using data with event Binding
+- Using **$event** to pass the data getting from the event.
+- **$event** is a kind of reserved variable name, it will be the data emmitted by that event.
+- The parameters of the method should be(event: Event)
+- Code in the method : **(HTMLInputElement)event.target.value;**
+### Two - way - Binding
+- Two - way - binding combines the property binding and event binding.
+- **[\(ngModel)] = "\<property name>"** will be trigger on the input event and update the value of the property \<property name> automatically. It will also update the value of the input element, if somewhere else change the property \<property name>.
+- To be able to use 'ngModel', the FormsModule(from @angular/forms) needs to be added to tyour importsp[] array in the AppModule.
