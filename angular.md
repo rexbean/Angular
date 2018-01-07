@@ -193,3 +193,13 @@ templateUrl -> componet.html (content which will replace the tag in index.html)*
     }
     ```
 ### Understanding the module and component
+- Change AppModule to use our own component
+    - import your component on the top of the file without '.ts'.
+    - add the component in to the declaration
+- Angular uses modules to bundle different pieces for example components(functionalities) of your app into packages.
+- Module is just the empty TypeScript class like component and tranform it into something else by adding a decorator here.
+- Four properties:
+    + **bootstrap**: tell angular which component you should be aware of at the point of the whole **application starts**,which component you should basically recognize **in the index.html**. ----> **register basic components here**
+    + **declaration**: **register new component**
+    + **imports**: add other modules
+        + BrowserModule is used to give us all the base functionalities we need to start our app.
