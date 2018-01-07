@@ -203,3 +203,52 @@ templateUrl -> componet.html (content which will replace the tag in index.html)*
     + **declaration**: **register new component**
     + **imports**: add other modules
         + BrowserModule is used to give us all the base functionalities we need to start our app.
+### Using the custom component
+- Add the component element(selector tag) in the .html file.
+### Creating component by CLI and nesting component
+- CLI create component automatically.
+    - **ng generate component \<component name>**
+    - **ng g c \<component name>**
+- Add the component selector tag in one of the .html file which we want to nest the component.
+### Working with component template
+- We can add HTML code in the TypeScript file.
+- Component ***must*** have either **templateUrl** or **template** property, but **only one** of them.
+- Using **template property** means inline template.
+- We can directly write the HTML code in the **template property**
+    + Using **''** , we can just write the HTML code in one line.
+    + Uisng **``** , we can write the HTML code in multiple line.
+- Inline template is better when there are less than 3 lines of HTML code.
+### Working with component style
+- Using **bootstrap** makes the page seem more beautiful in .html file.
+    ``` HTML
+    <div class = "container">
+        <div class = "row">
+            <div class = "col-xs-12">
+                <h3>I'm in the AppComponent</h3>
+                <hr>
+                <app-servers></app-servers>
+            </div>
+        </div>
+    </div>
+    ```
+- Using **Angular** to beautify the page in .css file.
+    ``` CSS
+    h3 {
+        color: darkblue;
+    }
+    ```
+- We can reference multiple style (.css file) in **StyleUrls**.
+- We can also use **inline style**, an array names **style** and **back tick(``)** for **multiple lines**.
+
+### Fully understand the component selector
+- **Selector** must be unique.
+- **Three** types of selectors:
+    - by elements:
+        + selector : '\<selecotr name>'
+        + \<\<selector name>></\<selector name>>
+    - by attribute:
+        + selector : '[\<selector name>]'
+        + \<div \<selector name>>\</div>
+    - by class :
+        + selector : '. \<selector name>'
+        + \<div class = "\<selector name>">\</div>
