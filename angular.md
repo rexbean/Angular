@@ -288,3 +288,34 @@ templateUrl -> componet.html (content which will replace the tag in index.html)*
 - Two - way - binding combines the property binding and event binding.
 - **[\(ngModel)] = "\<property name>"** will be trigger on the input event and update the value of the property \<property name> automatically. It will also update the value of the input element, if somewhere else change the property \<property name>.
 - To be able to use 'ngModel', the FormsModule(from @angular/forms) needs to be added to tyour importsp[] array in the AppModule.
+## Directive
+### Understanding directive
+- Directives are instructions in the DOM!
+- Components is one of the directive in the template.
+- Other directives without template.
+- We could build our **own directive**.
+- We can use our custom directive by typically **adding directive name in attributes selector**(3 types).
+    ``` TypeScript
+    @Directive({
+        selector: '<directive name>'
+    })
+    export class <directive class name>{
+
+    }
+    ```
+### Using ngIf to output data conditionaly
+- Built in directive uses the attribute selector.
+- Using ***ngIf = "\<elementsName>(the element will return true or false)"** to use the ngIf directive.
+- Sometime we should add **'*'** before the directive, when the directive is **a structural directive**, which means it **changes the structure of our DOM**. In other word, it **adds or does not add** the element.
+- For else condition:
+    + \# is a local reference.
+    + \<ng-template> is a component with angular which you can use to mark places in the DOM
+    + Using \<ng-template> with local referece, we mark a certain spot in the template.
+    + The completely code is :
+    ``` HTML
+    <p *ngIf = "True" else noServer>Has Server</>
+    <ng-template #noServer>
+        <p>no server</p>
+    </ng-template>
+    ```
+### Styling elements dynamically using ngStyle
