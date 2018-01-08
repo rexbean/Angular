@@ -23,3 +23,9 @@
             + **Recipe Item**
             + Recipe
 #### 3. Setting up a new application
+- Using ng new \<project name> to create a new app.
+- Adding the boostrap CSS framework to the app.
+    - npm install --save bootstrap
+    - add         **"../node_modules/bootstrap/dist/css/bootstrap.min.css",** in the **.angular-cli.json** file's style array.
+- Using ng serve to start the server.
+- Adding some code in .html to testing whether bootstrap has installed successfully 
