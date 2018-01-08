@@ -306,7 +306,7 @@ templateUrl -> componet.html (content which will replace the tag in index.html)*
 ### Using ngIf to output data conditionaly
 - Built in directive uses the attribute selector.
 - Using ***ngIf = "\<elementsName>(the element will return true or false)"** to use the ngIf directive.
-- Sometime we should add **'*'** before the directive, when the directive is **a structural directive**, which means it **changes the structure of our DOM**. In other word, it **adds or does not add** the element.
+- ngIf should add **'*'** before the directive, because it is **a structural directive**, which means it **changes the structure of our DOM**. In other word, it **adds or does not add** the element.
 - For else condition:
     + \# is a local reference.
     + \<ng-template> is a component with angular which you can use to mark places in the DOM
@@ -319,3 +319,19 @@ templateUrl -> componet.html (content which will replace the tag in index.html)*
     </ng-template>
     ```
 ### Styling elements dynamically using ngStyle
+- Attribute directives don't add or remove elements. They only change the element thye were placed on.
+- Attribute directives **do not need \***
+- Using **property binding** to configure it.
+- **ngStyle is used to change the CSS file.**
+- The advantage of the ngStyle can let us dynamically update the style.
+- Using **[ngStyle] = "{\<property name> : value(value, proerty, method)}"**
+### Applying CSS classes dynamically by ngClass
+- ngClass is used to **add or remove** css classes;
+- ngClass is also used **property binding**.
+- ngClass uses key - value pairs.
+    + Key: CSS class name
+    + Value: the condition that CSS class is attached or not
+### Output list using ngFor
+- ngFor is a structural directive.
+- Using **\*ngFor** = "let \<T> of Array\<T>" to iterate the Array
+- Using **let i = index** gets the index of the iteration, separated by the **';'** with ngFor.
