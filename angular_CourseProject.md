@@ -28,4 +28,34 @@
     - npm install --save bootstrap
     - add         **"../node_modules/bootstrap/dist/css/bootstrap.min.css",** in the **.angular-cli.json** file's style array.
 - Using ng serve to start the server.
-- Adding some code in .html to testing whether bootstrap has installed successfully 
+- Adding some code in .html to testing whether bootstrap has installed successfully
+#### 4. Creating the components
+- If a component only be used by another component. It does not need a new folder.
+- see Creating component manually in angular.md
+- Using **ng g c \<folder>/\<subfolder>** creates component in the exists component.
+#### 5. Using the components
+#### 6. Adding a navigate bar
+- Read the bootstrap <nav class="navbar">
+- This is wrote in header.componetn.html
+#### 7. Creating recipe model
+- Adding recipe.module.ts in the recipe folder.
+#### 8. Adding content to the recipes component
+#### 9. Using ngFor to iterate the recipes Array
+#### 10. Display the recipe detail
+#### 11. Working on Shoppinglist Component
+#### 12. Creating Ingredient model
+``` TypeScript
+    export class Ingredient{
+        public name: string;
+        public amount: number;
+        constructor(name: string, amount: number){
+            this.name = name;
+            this.amount = amount;
+        }
+    }
+    // code below is equal to that above
+    export class Ingredient{
+        constructor(public name: string, public amount: number){}
+    }
+```
+#### 13. Addding a shoppinglist edit section
