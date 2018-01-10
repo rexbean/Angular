@@ -335,3 +335,8 @@ templateUrl -> componet.html (content which will replace the tag in index.html)*
 - ngFor is a structural directive.
 - Using **\*ngFor** = "let \<T> of Array\<T>" to iterate the Array
 - Using **let i = index** gets the index of the iteration, separated by the **';'** with ngFor.
+## Debugging
+### Understand Angular Error Message
+- Using developer tool in the Chrome.
+### Debugging code in the browser uisng Sourcemap
+- Click the **Sources**, find the **main.bundle.js**, find the **logic** then add **break point**.
