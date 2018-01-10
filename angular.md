@@ -340,3 +340,101 @@ templateUrl -> componet.html (content which will replace the tag in index.html)*
 - Using developer tool in the Chrome.
 ### Debugging code in the browser uisng Sourcemap
 - Click the **Sources**, find the **main.bundle.js**, find the **logic** then add **break point**.
+- Click the **Sources**, find **webpack://**, find the **.** folder, we can find the TypeScript Source code.
+### Using Augury to dive in to Angular App
+- This is a Chrome extension
+- We can see all components, properties, inject dependencies and routing.
+## Component & Databinding Deep Dive
+### Splitting apps into components
+- Creating new components which is better for the code reusing.
+- Move the properties into the certain components.
+### Property and event binding overview
+- Passing data between the components.
+- Property and event binding can be used in:
+    + HTML elements for Native Properties & Events
+    + Directives for Custom Properties & Events
+    + Components for Custom Properties & Events
+### Binding to the custom properties
+- **type definition** for a property {type: string, name: string, content: string}
+- **All properties** of the component **only can be accessed** by this component.
+- If you want the parent component bind the property in the child component, we should **add decorator Input()** before the property in the child component. And then using property binding in the element in the child component.
+- Decorator **Input()** can also be imported from **@angular/core**.
+### Assigning the alias to the custom property
+- We can add the alias as the parameter in the **decoraor Input()**
+### Binding to custom event
+- Maybe this is used to inform the parent component from the child one.
+- This is a little bit complicated than binding custom property.
+- The way to bind the custom event is same as the way to bind the event of the HTML element. But the argument **$event** is defined by the event in the child component.
+- In the child component, define a new property **invoked in the parent component** whose type is EventEmitter\<\<Paramter define>>() with **decorator Output() before**;
+- Creating a **method** in child component to **invoke the EventEmitter** by **\<EventEmitter>.emit({\<paramenter>})** and generate the parameters.
+### Assigning the alias to the custom Event
+- Adding the alias as the argument in the decorator Output()
+### Summary
+- **Input & Output** is a way to communicate between components.
+- **Service** is another way to do so.
+### Understanding view encapsulation
+- The way CSS works it doesn't really care in which CSS file you define the rule, It simply is applied to the **whole document** normally.
+- Angular has the goal of encapsulating styles for the component they belong to.
+- Angular uses different selector of the element to do the view encapsulation.
+### More on View encapsulation
+- We can add **encapsulation: ViewEncapsulation.None** in **@Component**, then there won't be different selector for the same kind of elements.
+- Emulated is the default one.
+- In the way above, no matter where the css rule writes, it will be applied by all the html files,but only this component doesn't have the unique selector.
+### Using Local References in Templates
+- **Local reference** can be added to **any HTML elements**.
+- Using **#\<reference Name>** to use the local reference.
+- In this way, it hold a reference to that element.
+- local reference can be used in anywhere in the HTML file but no in the typescript file.
+- But we can pass the local reference to the method as argument. In this way, we can use it in the TypeScript file.
+- In the typescript, we will get an element which local reference reference to.
+### Getting Access to the Template & DOM with @ViewChild
+- A way to access any elements in the template from typescript code.
+- Add **decorator ViewChild** before a property.
+- The argument is used to the selector of the element.
+    + The name of the local reference.
+    + The component.
+- This only get the **ElementRef**;
+- We can get the element by add **.nativeElement**
+- **Do not use this way to modify the value of the element!**
+### Projecting Content into Components with ng-Content
+- Passing complicated HTML code into component from outside.
+- Everything placed between the opening and closing tag of component will be lost by default.
+- Using **\<ng-content>\</ng-content> as a hook** in component to mark the place for angular where it should add any content it finds between the opening and closing tag here.
+### Understanding the Component Lifecyle
+- **ngOnInit()** is a **lifecyle hook**.
+- There are different phases for creation process and it will actually give us a chance to hook into these phases and excute some code.
+- We can hook into these phases by implementing some methods angular will call if they are present.
+- **ngOnChanges**
+    + may be executed multiple times.
+    + It will be executed **at the start** when a new component is created
+    + It will also be executed whenever one of our **bound input properties changes**.
+    + It should receive some arguments type of SimpleChanges.
+- **ngOnInit**
+    + It will be executed when the component is initialized.
+    + It is a phase when objects were created.
+    + It would run after the constructor.
+- **ngDoCheck**
+    + Run multiple times.
+    + It will be executed whenever **change detection** runs.
+        + **Change detection** used a system which Angular determines whether something changed on the template of a component or inside of a component, like the value of the property changes.
+    + It will not only be executed when something changes, but also some trigger of the events.
+- **ngAfterContentInit**
+    + This will be called whenever the content which will be  projected to the ng-content has been initialized.
+    + Not only the component but also the part in the parent component which will be added into the component.
+- **ngAfterContentChecked**
+    + It will be called every time the projected content has been checked.
+- **ngAfterViewInit**
+    + It will be called after the component's view and child views has been initialized ---> (has been rendered).
+- **ngAfterViewChecked**
+    + It will be called every time the view and child views have been checked.
+    + We can assured that well every all changes which had to be done were displayed in the view or no changes were detected by angular.
+- **ngOnDestroy**
+    + It will be called when some components been removed.
+    + A great place to do some clean up work.
+    + It will be called right before the objects are destroyed by angular.
+### Seeing LifeCyle Hooks in Action
+- For all hooks, we should implement that interface at the class.
+
+### LifeCycle Hooks and Template Access
+### Getting Access to ng-content with @ContentChild
+### Wrap up
