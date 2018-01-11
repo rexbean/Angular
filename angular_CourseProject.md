@@ -59,3 +59,11 @@
     }
 ```
 #### 13. Addding a shoppinglist edit section
+#### 14. Adding navigating with event binding and ngIf
+- Define custom event in the header then passing the parameter to the app.
+- Judge the parameter to set the component on the app.
+#### 15. Passing recipe data with property binding.
+#### 16. Passing Data with Event and Property binding
+- Draw a data flow can clearly get the property and event need to bind
+#### 17. Allow the user add ingredient in the shopping list
+- Using local reference and ViewChild
