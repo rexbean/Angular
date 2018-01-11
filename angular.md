@@ -408,7 +408,7 @@ templateUrl -> componet.html (content which will replace the tag in index.html)*
     + may be executed multiple times.
     + It will be executed **at the start** when a new component is created
     + It will also be executed whenever one of our **bound input properties changes**.
-    + It should receive some arguments type of SimpleChanges.
+    + It should receive some arguments type of SimpleChanges.It is the change element in the component.
 - **ngOnInit**
     + It will be executed when the component is initialized.
     + It is a phase when objects were created.
@@ -422,7 +422,7 @@ templateUrl -> componet.html (content which will replace the tag in index.html)*
     + This will be called whenever the content which will be  projected to the ng-content has been initialized.
     + Not only the component but also the part in the parent component which will be added into the component.
 - **ngAfterContentChecked**
-    + It will be called every time the projected content has been checked.
+    + It will be called every time the projected content has been checked, which means the after each check detection cycle.
 - **ngAfterViewInit**
     + It will be called after the component's view and child views has been initialized ---> (has been rendered).
 - **ngAfterViewChecked**
@@ -434,7 +434,9 @@ templateUrl -> componet.html (content which will replace the tag in index.html)*
     + It will be called right before the objects are destroyed by angular.
 ### Seeing LifeCyle Hooks in Action
 - For all hooks, we should implement that interface at the class.
-
+- Constructor() -> ngOnInit() -> ngAfterContentInit() -> ngAfterViewInit()
+- ngDocheck() -> ngAfterContentChecked() -> ngAfterViewChecked()
 ### LifeCycle Hooks and Template Access
+- When we get the value of the DOM in different hook, the value will b e different.
 ### Getting Access to ng-content with @ContentChild
-### Wrap up
+- Using **ContentChild** can get the access to content which is stored in the another component but then passed by the ng-content.
