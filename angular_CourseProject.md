@@ -67,3 +67,5 @@
 - Draw a data flow can clearly get the property and event need to bind
 #### 17. Allow the user add ingredient in the shopping list
 - Using local reference and ViewChild
+#### 18. Add the dropdown menu by directive
+- When Using this directive, we don't need to add the \* or squre brackets, because we don't need to configure it.

@@ -440,3 +440,108 @@ templateUrl -> componet.html (content which will replace the tag in index.html)*
 - When we get the value of the DOM in different hook, the value will b e different.
 ### Getting Access to ng-content with @ContentChild
 - Using **ContentChild** can get the access to content which is stored in the another component but then passed by the ng-content.
+## Directives Deep Dive
+### Module Introduction
+- Attribute:
+    - They sit on the element just like the attribute
+    - Only change the properties.
+- Structural:
+    - Also sit on the element just like the attribute
+    - They also change the structure of the DOM around this element.
+    - Add or remove the element.
+### ngFor & ngIf Recap
+- We cannot have **more than one structural directives** on the **same element**.
+### ngClass and ngStyle Recap
+- ngClass
+    - Used to add or remove CSS class
+    - [ngClass] = {\<class name> : \<condition to use the class>}
+- ngStyle
+    - Used to add or remove a CSS style
+    - [ngStyle] = {\<property> : \<value>}
+### Creating a Basic Attribute Directive
+- Create a new folder in the app folder named the name of the directive.
+- Create a new file named \<directive name>.directive.ts
+- Add square bracket to the selector to have this into attribute style. This can be recognize when I do not add the square element.
+- the arguments can be listed and Angular can give us this is injection which will be talked next module.
+- It is better to implements the ngOnInit();
+- Add code in it
+    ``` TypeScript
+    import { Directive } from '@angular/core';
+    @Directive({
+        selector:'[<CamelCaseNotation>]'
+    })
+    export.class <directive name> implements OnInit {
+        constructor(){
+
+        }
+        ngOnInit(){
+
+        }
+    }
+    ```
+- Add the directive to declaration in the **app.module.ts**
+- Add the directive to the element we want.
+### Using the Renderer to build a Better Attribute Directives
+- Directly acess the element and change its style is not the best way to do this.
+- Angular also render your templates without a DOM, like render.
+- We can use renderer to do this.
+- Create a directive by CLI :**ng g d \<directive name>**
+    ``` TypeScript
+    constuctor(private eleRef: ElementRef, private renderer:Renderer2){}
+    ngOnInit(){
+        this.renderer.setStyle(eleRef.nativeElement,'background-color','blue',<flag>);
+    }
+    ```
+- Advantage: under some circumstances, accessing directly to the DOM is not allowed.
+### Using HostListener to Listen to Host Events
+- HostListener is used to listen to the certain event.
+- Using **@HostListener('\<event name> supported by the DOM element') \<method name>(event: Event)** to do so.
+- mouseenter for mouse hover event.
+### Using HostBinding to Bind to Host Properties
+- HostBinding bind to some property whose value will become important.
+- The argument of the HostBinding is the property of the element which we want to bind. like('style.backgroundColor')
+- Using **@HostBinding('\<property of the element>') property**
+- Set value to this property can change the property we bind.
+- Using HostListener & HostBinding is a better way.
+### Binding to Directive Properties
+- Using a custom property binding can let the user to set the value outside the directive.
+- Using **\<directive name> [\<property name of the directive>] = "\<the value>"**
+- Angular will check the whether the directive has the property first.
+- If the directive only has one property or a main property, we can make alias of that property to the directive name. Then we can do like below:**[\<directive name>] = "\<value>"**
+- For **property binding**, we can **remove** the **square brackets** and the **single quotation mark**.
+### What Happens behind the Scenes to Structural Directives
+- \* star mark in before the directive indicates this is a struactural directive.
+- Angular need to transform the structural directives into something where we endup with tools like property binding and so on.
+- <ng-template> will not be rendered but allow us to define a template in the end. For **\<ng-template>** is the form that it will get transformed. so we can only use the the property binding for the **ngIf**
+### Building a Structural Directive
+- Using **@Input() set unless(\<the value the property would normally get as an input>)**, this is still a property, but also a settor of the property. It will be executed at the property changes.
+- TemplatRef is the reference of the template like the ElementRef.
+- ViewContainerRef means where.
+- **So it means where to render what template**.
+    ``` TypeScript
+    @Directive({
+        selector:'[appUnless]'
+    })
+    export class UnlessDirective{
+        @Input('appUnless') set unless(condition: boolean){
+            if(!condition){
+                this.vcRef.createEmbeddedView(this.templateRef);
+                // Create a view in this container
+            } else {
+                this.vcRef.clear();
+            }
+        }
+        constructor(private templateRef: TemplateRef<any>, private vcRef: ViewContainerRef){
+
+        }
+    }
+    ```
+- Using just like ngIf
+### Understanding ngSwitch
+- Usage:
+    ```HTML
+    <div [ngswitch] = "<switch variable>">
+        <p *ngSwitchCase = "\<value>"> something </p>
+        <p *ngSwitchDefault> default </p>
+    </div>
+    ```
