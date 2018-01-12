@@ -69,3 +69,19 @@
 - Using local reference and ViewChild
 #### 18. Add the dropdown menu by directive
 - When Using this directive, we don't need to add the \* or squre brackets, because we don't need to configure it.
+#### 19. Design and manage the services
+- Services allow us to centralize tasks, manage data in a central place and so on.
+- So both of the two features need the service.
+    - Shoppinglist need service to manange shoppinglist and communicate with the recipe.
+    - Recipe need service to manage the recipe.
+#### 20. Setup service.
+#### 21. Mange recipe data in recipe service.
+- Use Array.slice() to do the deep copy.
+#### 22. Using a service to do the cross component communication.
+#### 23. Adding the shoppinglist service.
+#### 24. Using service to do the "push notification"
+- Because of the **.slice()** on the array, when we add new elements to the array, the copy of the array won't add it.
+- So we should inform the component that new data is available.
+- Add a eventEmitter of the type of the Array, and add the subsribe at the the place we show the data of that Array.
+#### 25. Adding ingredient to the recipe.
+#### 26. Passing the ingredient from recipe to the shoppinglist
