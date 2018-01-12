@@ -203,6 +203,7 @@ templateUrl -> componet.html (content which will replace the tag in index.html)*
     + **declaration**: **register new component**
     + **imports**: add other modules
         + BrowserModule is used to give us all the base functionalities we need to start our app.
+    + **providers**: provide to the Angular how to use the service.
 ### Using the custom component
 - Add the component element(selector tag) in the .html file.
 ### Creating component by CLI and nesting component
@@ -545,3 +546,46 @@ templateUrl -> componet.html (content which will replace the tag in index.html)*
         <p *ngSwitchDefault> default </p>
     </div>
     ```
+## Services & Dependency injection
+- Service is just act as a "High level" object.
+### Creating a Logging Service
+- Service just act as a center of the code.
+- Creating a new Services
+    + Create a \<service name>.service.ts
+    + Add code:
+    ``` TypeScript
+    export class loggingService{
+        logStatusChange(status:string){
+            console.log('A server status changed, new status:'+ status);
+        }
+    }
+    ```
+### Injecting the Logging Service into components
+- Angular **Dependency injector** is used to **acess the service**.
+- **Dependency** is a class which will depend on.
+- **Dependency injector** will simply inject the dependency, **injects an instance of this class into our component** automatically.
+- So all we need to do is to tell the Angular that we need the instance.
+- How can we use service?
+    + Create a constructor.
+    + Add a variable which type is the Service.
+    + import the Services
+    + Provide service(tell Angular how to create)
+        + Add providers[\<the type of the service>] property in the component
+        + Add into provider just like **instantiate a object**.
+    + Using the service by this.\<variable name>.\<method name>().
+### Creating a Data Service
+- Data service is used to store and manage our data.
+- Using a service to act as a Global Array and method.
+### Understand the Hierarchical Injector
+- Hierarchical Injector:
+    - Instance of Service in **AppModule**: **All the things** will get it (including **the service**).
+    - Instance of Service in **AppComponent**: **All the components** will get it.
+    - Instance of Service in **other components**: **Only it and its child Components** can get it.
+### Inject service into service
+- If we want to inject service into a service, we should use a **decorator @Injectable()**.
+- It tells the Angular that this service is injectable or **something can be injected in**.
+### Using Services to do the cross-component communication
+- We want to trigger some events in a component and listened in another.
+- Adding an EventEmitter in Service.
+- In the Component(From) just using the service.EventEmitter.emit(parameter).
+- In the Component(To) just using the service.EventEmitter.subscribe(\<Function here>);
