@@ -589,3 +589,79 @@ templateUrl -> componet.html (content which will replace the tag in index.html)*
 - Adding an EventEmitter in Service.
 - In the Component(From) just using the service.EventEmitter.emit(parameter).
 - In the Component(To) just using the service.EventEmitter.subscribe(\<Function here>);
+## Routing
+### Introduction of Routing
+- Angular ships with its own router which allows us to change url in the url bar but still only use one page but then exchange major parts or a lot of parts of the page. ---> Angular only change the DOM in the single page.
+### Setting up and Loading routers
+- Create a **const appRoutes** in the **AppModule** and **import Routers from '@angular/router'**
+- appRoutes is an array , each router is a JavaScript object.
+- path is the url after your domain.
+- After path is the action when we get the path.
+    - component: The component should be loaded
+- Example:
+    ``` TypeSript
+    const appRoutes: Routes = [
+        { path: '', component: HomeComponent }, //localhost:4200/users
+        { path: 'users', component: UsersComponent },
+        { path: 'servers' component: ServersComponent },
+    ];
+    ```
+- register the routes
+    - add a new **RouterModule** import into the **imports** in appModule
+    - **RouterModule.forRoot(appRoutes)**
+    - Using \<router-outlet> to inform where the component to be shown.
+### Navigate with the route links
+- If we change the href of the tab, it really work, but it will reload the app.This will lost the state of the app.
+- Using Angular directive **routerLink = "\<route>"** to do so.
+- routerLink knows which component the elements sit on, which the router it sits on.
+- Using property binding can let us construct complicated path very easily,like **[routerLink] = "['\<path>']"**
+- In this way, it won't send request to the server, it only change the DOM in the page.
+### Understand the navigation path
+- If we don't write **'/'** before the path, it will be the **relative path**.
+- We can user **'../'** to go up one level. It will romove current loading segment
+    - for example it will go to localhost:4200 from localhost:4200/server/something
+### Styling active router links
+- **Directive RouterLinkeActive = "class of CSS "** usde to change the CSS when the router is active. For example the tab.
+- RouterLinkeActive will be active when it checked that the path is part of the url.
+- So we can do some configuration for it using **[routerLinkActiveOptions] ="{exact:true}"**.It means **only this path** is exact same as the route it will work.
+### Navigating Programmatically
+- Trigger the navigation from the TypeScript code.
+- router.navigate method does not know the router it sits on.
+- Using Absolute path
+    ``` TypeScript
+    constructor(private router:Router){}
+    onLoadServers(){
+        this.router.navigate(['<absolute path>']);
+    }
+    ```
+- Using Relative path
+    - ActivatedRoute means the route which loaded this component and the route simply is kind of a JavaScript object which keeps a lot of meta information about the currently active route.
+    ``` TypeScript
+    constructor(private router:Router, private route : ActivatedRoute){}
+    onReload(){
+        this.router.navigate(['<relative path>',{relativeTo: this.route}]);
+    }
+    ```
+### Passing parameter to Routers and fetch it
+- Using path: **'\<route>/(:\<parameter name>)+'** to pass the parameter to the route.
+- Fetch the parameter:
+    ``` TypeScript
+    constructor(private route: ActivatedRoute){}
+    ngOnInit(){
+        this.user = {
+            id: this.route.snapshot.params['<parameter name>']
+        };
+    }
+    ```
+- Using RouteLinke of property binding: **[routerLink] = ['<path>',('<parameter>')+]**
+    - this will have problem when using it in the same component(only the url will change), because Angular cleverly not initialize the component again.
+- So if we use the **route.snapshot**, we should do some changes.We will use the** route.params.subscribe()**, which is a observable for the **asynchronous tasks**.
+    - **Observable is an easy way to subscribe to some event which might happen in the future then execute**
+    - The first argument is function to be executed whenever the parameters change in this use case.
+        ``` TypeSript
+        this.route.params.subscribe(
+            (params:Params) => {
+                this.id = params['id'];
+            }
+        );
+        ```
