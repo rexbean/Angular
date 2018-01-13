@@ -599,7 +599,7 @@ templateUrl -> componet.html (content which will replace the tag in index.html)*
 - After path is the action when we get the path.
     - component: The component should be loaded
 - Example:
-    ``` TypeSript
+    ``` TypeScript
     const appRoutes: Routes = [
         { path: '', component: HomeComponent }, //localhost:4200/users
         { path: 'users', component: UsersComponent },
@@ -658,7 +658,7 @@ templateUrl -> componet.html (content which will replace the tag in index.html)*
 - So if we use the **route.snapshot**, we should do some changes.We will use the** route.params.subscribe()**, which is a observable for the **asynchronous tasks**.
     - **Observable is an easy way to subscribe to some event which might happen in the future then execute**
     - The first argument is function to be executed whenever the parameters change in this use case.
-        ``` TypeSript
+        ``` TypeScript
         this.route.params.subscribe(
             (params:Params) => {
                 this.id = params['id'];
